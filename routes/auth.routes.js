@@ -1,9 +1,24 @@
 const express = require('express');
 const router = express.Router();
-const authController = require('../controllers/auth.controller');
+const {getMe, register, login, logout, sendTokenResponse} = require('../controllers/auth.controller');
+const { protect, authorize } = require('../middleware/auth.middleware');
+// const { rateLimit } = require('express-rate-limit');
+// const { ROLES } = require('../config');
 
-router.post('/login', authController.login);
-router.post('/logout', authController.logout);
-router.get('/me', authController.getCurrentUser);
+// Protected route
+router.get('/protected', protect, (req, res) => {
+  res.json({ success: true, user: req.user });
+});
+
+// Admin-only route
+router.get('/admin', protect, authorize('admin'), (req, res) => {
+  res.json({ success: true, user: req.user });
+});
+
+router.post('/login', login);
+router.post('/register', register);
+// router.post('/send-token', sendTokenResponse);
+router.post('/logout', logout);
+router.get('/me', protect, getMe);
 
 module.exports = router;

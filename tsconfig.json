@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+      "esModuleInterop": true,
+      "module": "commonjs",
+      "target": "ES2020",
+      "outDir": "./dist",
+      "rootDir": ".",
+      "strict": true,
+      "skipLibCheck": true
+    },
+    "include": ["**/*.ts", "middleware/auth.middleware.js", "utils/redis.js"],
+    "exclude": ["node_modules"]
+  }

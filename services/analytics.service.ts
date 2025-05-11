@@ -1,6 +1,6 @@
 import { Patient } from '../models/Patient';
 import { Appointment } from '../models/Appointment';
-import { Alert } from '../models/Alert';
+import { Alert } from '../models/Alert.js/index.js';
 import mongoose from 'mongoose';
 
 export const getPatientDemographics = async () => {

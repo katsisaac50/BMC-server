@@ -1,4 +1,4 @@
-import Alert from '../models/Alert';
+import Alert from '../models/Alert.js/index.js';
 import { IAlert } from '../types/custom.types';
 import logger from '../utils/logger';
 import { FilterQuery, QueryOptions } from 'mongoose';

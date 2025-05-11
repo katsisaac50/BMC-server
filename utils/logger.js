@@ -1,4 +1,21 @@
 
+const winston = require('winston');
+
+const logger = winston.createLogger({
+  level: 'info',
+  format: winston.format.combine(
+    winston.format.timestamp(),
+    winston.format.printf(({ timestamp, level, message }) => {
+      return `${timestamp} [${level.toUpperCase()}]: ${message}`;
+    })
+  ),
+  transports: [
+    new winston.transports.Console(),
+    new winston.transports.File({ filename: 'app.log' })
+  ]
+});
+
+module.exports = logger;
 
 // This is a simple logger utility using the 'winston' library
 // to log messages to the console and a file.
@@ -11,7 +28,7 @@
 
 // In your app.js or main server file
 
-const logger = require('./utils/logger');
+// const logger = require('./utils/logger');
 
 // Use the logger to log messages in your application
 // Example of logging an info message:
@@ -30,21 +47,4 @@ const logger = require('./utils/logger');
 // });
 
 
-const winston = require('winston');
-
-const logger = winston.createLogger({
-  level: 'info',
-  format: winston.format.combine(
-    winston.format.timestamp(),
-    winston.format.printf(({ timestamp, level, message }) => {
-      return `${timestamp} [${level.toUpperCase()}]: ${message}`;
-    })
-  ),
-  transports: [
-    new winston.transports.Console(),
-    new winston.transports.File({ filename: 'app.log' })
-  ]
-});
-
-module.exports = logger;
 

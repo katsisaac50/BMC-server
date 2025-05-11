@@ -7,6 +7,7 @@ let users = [
     username: 'admin',
     password: bcrypt.hashSync('admin123', 10),
     role: ROLES.ADMIN,
+    role2: { type: String, enum: ['user', 'admin'], default: 'user' }
     name: 'Admin User',
     email: 'admin@hospital.com',
     isActive: true

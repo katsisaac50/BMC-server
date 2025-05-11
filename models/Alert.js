@@ -1,17 +1,8 @@
-import mongoose, { Schema, Document } from 'mongoose';
-import { AlertPriority, AlertType } from '../types/custom.types';
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
+const { AlertPriority, AlertType } = require('../types/custom.types');
 
-export interface IAlert extends Document {
-  type: AlertType;
-  message: string;
-  priority: AlertPriority;
-  isRead: boolean;
-  relatedPatient?: mongoose.Types.ObjectId;
-  relatedStaff?: mongoose.Types.ObjectId;
-  metadata?: any;
-}
-
-const AlertSchema: Schema = new Schema({
+const AlertSchema = new Schema({
   type: { 
     type: String, 
     required: true,
@@ -38,4 +29,16 @@ AlertSchema.index({ createdAt: -1 });
 AlertSchema.index({ relatedPatient: 1 });
 AlertSchema.index({ relatedStaff: 1 });
 
-export default mongoose.model<IAlert>('Alert', AlertSchema);
+// Type definition (for documentation purposes)
+/**
+ * @typedef {Object} IAlert
+ * @property {AlertType} type
+ * @property {string} message
+ * @property {AlertPriority} priority
+ * @property {boolean} isRead
+ * @property {mongoose.Types.ObjectId} [relatedPatient]
+ * @property {mongoose.Types.ObjectId} [relatedStaff]
+ * @property {*} [metadata]
+ */
+
+module.exports = mongoose.model('Alert', AlertSchema);
